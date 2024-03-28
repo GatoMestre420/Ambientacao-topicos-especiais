@@ -1,0 +1,9 @@
+###Raiz da aplicação
+GET http://localhost:5240
+
+### Listagem de Produtos
+GET http://localhost:5240/produto/listar
+
+### Cadastro de Produtos
+POST http://localhost:5240/produto/cadastrar
+
