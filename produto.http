@@ -4,6 +4,9 @@ GET http://localhost:5240
 ### Listagem de Produtos
 GET http://localhost:5240/produto/listar
 
+###Busca de Produto por nome 
+GET 
+
 ### Cadastro de Produtos
 POST http://localhost:5240/produto/cadastrar
 

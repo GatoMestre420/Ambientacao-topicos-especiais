@@ -1,15 +1,20 @@
+using API.Models;
+
+
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
-Produto produto = new Produto();
-produto.setNome("bolacha");
-Console.WriteLine(produto.getNome());
+// Produto produto = new Produto();
+// produto.Nome = "Bolacha";
+// Console.WriteLine(produto.Nome);
+
+
 
 List<Produto> produtos = new List<Produto>();
-produtos.Add(new Produto("Celular", "IOS"));
-produtos.Add(new Produto("Celular", "ANDROID"));
-produtos.Add(new Produto("Televisão", "LG"));
-produtos.Add(new Produto("Placa de video", "NVIDEO"));
+produtos.Add(new Produto("Celular", "IOS", 1000.00));
+produtos.Add(new Produto("Celular", "ANDROID", 900.00));
+produtos.Add(new Produto("Televisão", "LG", 5000.00));
+produtos.Add(new Produto("Placa de video", "NVIDEO", 4500.00));
 
 //Funcionalidades da aplicação = EndPoints
 // GET: 
@@ -17,11 +22,32 @@ app.MapGet("/", () => "API de Produtos");
 
 app.MapGet("/produto/listar", () => produtos);
 
+app.MapGet("/produto/buscar/{nome}", ([FromRoute] string nome) =>
+{
+
+    for (int i = 0; i < produtos.Count; i++)
+    {
+        if (produtos[i].Nome == nome)
+        {
+            //retornar o produto encontrado
+            return Results.Ok(produtos[i]);
+        }
+    }
+    return Results.NotFound("Produto não encontrado!");
+}
+);
+
 // EXERCÍCIO - Cadastrar Produtos dentro da lista
 app.MapPost("/produto/cadastrar", () => "cadastro de produtos!");
 
 
+//Exercicios 
+//1) Cadastrar um produto
+//a) pela URL
+//b) pelo corpo
+//2) remoção do Produto
+//3) Alteração do produto
+
 app.Run();
 
-//registro = record
-record Produto(string nome, string descricao);
+
