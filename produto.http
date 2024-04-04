@@ -5,8 +5,8 @@ GET http://localhost:5240
 GET http://localhost:5240/produto/listar
 
 ###Busca de Produto por nome 
-GET 
+GET http://localhost:5240/produto/buscar/Celular
 
 ### Cadastro de Produtos
-POST http://localhost:5240/produto/cadastrar
+POST http://localhost:5240/produto/cadastrar/arroz/alimento/10
 

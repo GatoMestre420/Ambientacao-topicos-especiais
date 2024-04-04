@@ -23,6 +23,7 @@ app.MapGet("/", () => "API de Produtos");
 
 app.MapGet("/produto/listar", () => produtos);
 
+//http://localhost:5240/produto/buscar/nomedoproduto
 app.MapGet("/produto/buscar/{nome}", ([FromRoute] string nome) =>
 {
 
@@ -39,7 +40,23 @@ app.MapGet("/produto/buscar/{nome}", ([FromRoute] string nome) =>
 );
 
 // EXERCÍCIO - Cadastrar Produtos dentro da lista
-app.MapPost("/produto/cadastrar", () => "cadastro de produtos!");
+app.MapPost("/produto/cadastrar/{nome}/{descricao}/{valor}",
+ ([FromRoute] string nome, [FromRoute] string descricao, [FromRoute] double valor) =>
+ {
+
+     //Preencher o objeto pelo construtor
+     Produto produto = new Produto(nome, descricao, valor);
+
+     //Preencher o objeto pelos atributos 
+     produto.Nome = nome;
+     produto.Descricao = descricao;
+     produto.Valor = valor;
+
+     //Adicionar o objeto dentro da lista 
+     produtos.Add(produto);
+     return Results.Created("", produto);
+
+ });
 
 
 //Exercicios 
