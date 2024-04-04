@@ -8,5 +8,11 @@ GET http://localhost:5240/produto/listar
 GET http://localhost:5240/produto/buscar/Celular
 
 ### Cadastro de Produtos
-POST http://localhost:5240/produto/cadastrar/arroz/alimento/10
+POST http://localhost:5240/produto/cadastrar
+Content-Type: application/json
 
+{
+    "nome" : "Arroz",
+    "descricao" : "Alimento",
+    "valor" : 15
+}

@@ -40,17 +40,16 @@ app.MapGet("/produto/buscar/{nome}", ([FromRoute] string nome) =>
 );
 
 // EXERCÍCIO - Cadastrar Produtos dentro da lista
-app.MapPost("/produto/cadastrar/{nome}/{descricao}/{valor}",
- ([FromRoute] string nome, [FromRoute] string descricao, [FromRoute] double valor) =>
+app.MapPost("/produto/cadastrar", ([FromBody] Produto produto) =>
  {
 
-     //Preencher o objeto pelo construtor
-     Produto produto = new Produto(nome, descricao, valor);
+     //  //Preencher o objeto pelo construtor
+     //  Produto produto = new Produto(nome, descricao, valor);
 
-     //Preencher o objeto pelos atributos 
-     produto.Nome = nome;
-     produto.Descricao = descricao;
-     produto.Valor = valor;
+     //  //Preencher o objeto pelos atributos 
+     //  produto.Nome = nome;
+     //  produto.Descricao = descricao;
+     //  produto.Valor = valor;
 
      //Adicionar o objeto dentro da lista 
      produtos.Add(produto);
@@ -60,9 +59,9 @@ app.MapPost("/produto/cadastrar/{nome}/{descricao}/{valor}",
 
 
 //Exercicios 
-//1) Cadastrar um produto
-//a) pela URL
-//b) pelo corpo
+//1) Cadastrar um produto : ok
+//a) pela URL : ok
+//b) pelo corpo : ok
 //2) remoção do Produto
 //3) Alteração do produto
 
