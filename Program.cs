@@ -43,19 +43,44 @@ app.MapGet("/produto/buscar/{nome}", ([FromRoute] string nome) =>
 app.MapPost("/produto/cadastrar", ([FromBody] Produto produto) =>
  {
 
-     //  //Preencher o objeto pelo construtor
-     //  Produto produto = new Produto(nome, descricao, valor);
-
-     //  //Preencher o objeto pelos atributos 
-     //  produto.Nome = nome;
-     //  produto.Descricao = descricao;
-     //  produto.Valor = valor;
-
-     //Adicionar o objeto dentro da lista 
      produtos.Add(produto);
      return Results.Created("", produto);
 
  });
+
+//deletar Produto
+app.MapDelete("/produtos/deletar/{nome}", ([FromRoute] string nome) =>
+{
+
+    for (int i = 0; i < produtos.Count; i++)
+    {
+        if (produtos[i].Nome == nome)
+        {
+            produtos.Remove(produtos[i]);
+            return Results.Ok(produtos);
+
+        }
+    }
+    return Results.NotFound("Produto não encontrado!");
+}
+);
+
+//Alterar produto --------------------------
+app.MapPut("/produtos/alterar/{nome}", ([FromRoute] string nome, [FromBody] Produto produtoAlterado) =>
+{
+    Produto? produto = produtos.FirstOrDefault(x => x.Nome == nome);
+    if (produto is null)
+    {
+        return Results.NotFound("Produto não encontrado!");
+    }
+    produto.Nome = produtoAlterado.Nome;
+    produto.Descricao = produtoAlterado.Descricao;
+    produto.Valor = produtoAlterado.Valor;
+    return Results.Ok("Produto Alterado!");
+
+});
+
+
 
 
 //Exercicios 
