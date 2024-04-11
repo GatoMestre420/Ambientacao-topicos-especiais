@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+
+
 // Produto produto = new Produto();
 // produto.Nome = "Bolacha";
 // Console.WriteLine(produto.Nome);
@@ -80,15 +82,6 @@ app.MapPut("/produtos/alterar/{nome}", ([FromRoute] string nome, [FromBody] Prod
 
 });
 
-
-
-
-//Exercicios 
-//1) Cadastrar um produto : ok
-//a) pela URL : ok
-//b) pelo corpo : ok
-//2) remoção do Produto
-//3) Alteração do produto
 
 app.Run();
 
