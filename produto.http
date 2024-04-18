@@ -1,10 +1,10 @@
-###Raiz da aplicação
+### Raiz da aplicação
 GET http://localhost:5240
 
 ### Listagem de Produtos
 GET http://localhost:5240/produto/listar
 
-###Busca de Produto por nome 
+### Busca de Produto por nome 
 GET http://localhost:5240/produto/buscar/Celular
 
 ### Cadastro de Produtos
@@ -12,14 +12,14 @@ POST http://localhost:5240/produto/cadastrar
 Content-Type: application/json
 
 {
-    "nome" : "Arroz",
+    "nome" : "arroz",
     "descricao" : "Alimento",
     "valor" : 15
 }
-###deletar produto
+### Deletar produto
 DELETE http://localhost:5240/produtos/deletar/Celular
 
-###Alterar Produto
+### Alterar Produto
 PUT http://localhost:5240/produtos/alterar/Celular
 Content-Type: application/json
 

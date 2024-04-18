@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 
 var builder = WebApplication.CreateBuilder(args);
+//Registrar o serviço de banco da dados
+builder.Services.AddDbContext<AppDataContext>();
+
 var app = builder.Build();
 
 
@@ -20,10 +23,19 @@ produtos.Add(new Produto("Televisão", "LG", 5000.00));
 produtos.Add(new Produto("Placa de video", "NVIDEO", 4500.00));
 
 //Funcionalidades da aplicação = EndPoints
-// GET: 
+// GET: http://localhost:5240/
 app.MapGet("/", () => "API de Produtos");
 
-app.MapGet("/produto/listar", () => produtos);
+// GET http://localhost:5240/produto/listar
+app.MapGet("/produto/listar", ([FromServices] AppDataContext ctx) =>
+{
+    if (ctx.TabelaProdutos.Any())
+    {
+        return Results.Ok(ctx.TabelaProdutos.ToList());
+    }
+    return Results.NotFound("Não existem produtos na tabela");
+
+});
 
 //http://localhost:5240/produto/buscar/nomedoproduto
 app.MapGet("/produto/buscar/{nome}", ([FromRoute] string nome) =>
@@ -42,10 +54,11 @@ app.MapGet("/produto/buscar/{nome}", ([FromRoute] string nome) =>
 );
 
 // EXERCÍCIO - Cadastrar Produtos dentro da lista
-app.MapPost("/produto/cadastrar", ([FromBody] Produto produto) =>
+app.MapPost("/produto/cadastrar", ([FromBody] Produto produto, [FromServices] AppDataContext ctx) =>
  {
-
-     produtos.Add(produto);
+     // Adicionar o objeto dentro da tabela de banco de dados
+     ctx.TabelaProdutos.Add(produto);
+     ctx.SaveChanges();
      return Results.Created("", produto);
 
  });

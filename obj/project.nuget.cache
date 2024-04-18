@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "YXl4Vb+x5fyWuRiKDG1nM8ydMFahlz4GoXOA8p9DIkYu9EMe0vlo2SMONtc5cNAYPPxXEofiE7B4qWqpdF9oLw==",
+  "dgSpecHash": "tqskeKJDgL3UAqM0urEnC9bPN1HZqGG3134qG9IG1XTRWF3ThS9WFQ/VBR49uxpJKnTKwHw36C0dkjs4B2zjGg==",
   "success": true,
-  "projectFilePath": "C:\\Luan\\ambientacao\\API\\API\\API.csproj",
+  "projectFilePath": "C:\\Luan\\ambientacao\\api\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\autologon\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\autologon\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\6.0.0\\microsoft.bcl.asyncinterfaces.6.0.0.nupkg.sha512",
