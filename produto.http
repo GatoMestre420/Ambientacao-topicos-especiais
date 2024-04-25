@@ -5,19 +5,19 @@ GET http://localhost:5240
 GET http://localhost:5240/produto/listar
 
 ### Busca de Produto por nome 
-GET http://localhost:5240/produto/buscar/Celular
+GET http://localhost:5240/produto/buscar/Destiny
 
 ### Cadastro de Produtos
 POST http://localhost:5240/produto/cadastrar
 Content-Type: application/json
 
 {
-    "nome" : "Destiny",
-    "descricao" : "Jogo",
-    "valor" : 200
+    "nome" : "Feijão Branco",
+    "descricao" : "Alimento",
+    "valor" : 7
 }
 ### Deletar produto
-DELETE http://localhost:5240/produtos/deletar/arroz
+DELETE http://localhost:5240/produtos/deletar/
 
 ### Alterar Produto
 PUT http://localhost:5240/produtos/alterar/Celular

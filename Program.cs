@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using API.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,15 +14,6 @@ var app = builder.Build();
 // Produto produto = new Produto();
 // produto.Nome = "Bolacha";
 // Console.WriteLine(produto.Nome);
-
-
-
-List<Produto> produtos = new List<Produto>();
-produtos.Add(new Produto("Celular", "IOS", 1000.00));
-produtos.Add(new Produto("Celular", "ANDROID", 900.00));
-produtos.Add(new Produto("Televisão", "LG", 5000.00));
-produtos.Add(new Produto("Placa de video", "NVIDEO", 4500.00));
-
 //Funcionalidades da aplicação = EndPoints
 // GET: http://localhost:5240/
 app.MapGet("/", () => "API de Produtos");
@@ -54,10 +46,26 @@ app.MapGet("/produto/buscar/{id}", ([FromRoute] string id,
 // Cadastrar Produtos dentro da lista
 app.MapPost("/produto/cadastrar", ([FromBody] Produto produto, [FromServices] AppDataContext ctx) =>
  {
-     // Adicionar o objeto dentro da tabela de banco de dados
-     ctx.TabelaProdutos.Add(produto);
-     ctx.SaveChanges();
-     return Results.Created("", produto);
+     List<ValidationResult> erros = new List<ValidationResult>();
+     if (!Validator.TryValidateObject(produto, new ValidationContext(produto), erros, true
+     ))
+     {
+         return Results.BadRequest(erros);
+     }
+
+     //REGRA DE NEGÓCIO - não é permitido o cadastro de um produto com um nome já cadastrado. 
+     Produto? produtoEncontrado = ctx.TabelaProdutos.FirstOrDefault
+         (x => x.Nome == produto.Nome);
+
+     if (produtoEncontrado is null)
+     {
+         // Adicionar o objeto dentro da tabela de banco de dados
+         ctx.TabelaProdutos.Add(produto);
+         ctx.SaveChanges();
+         return Results.Created("", produto);
+     }
+     return Results.BadRequest("Já Existe um produto com o mesmo nome");
+
 
  });
 
@@ -66,7 +74,7 @@ app.MapDelete("/produtos/deletar/{id}", ([FromRoute] string id,
    [FromServices] AppDataContext ctx) =>
 {
 
-    Produto? produto = ctx.TabelaProdutos.FirstOrDefault(x => x.Valor > 1000);
+    Produto? produto = ctx.TabelaProdutos.Find(id);
     if (produto is null)
     {
         return Results.NotFound("produto não encontrado!");
