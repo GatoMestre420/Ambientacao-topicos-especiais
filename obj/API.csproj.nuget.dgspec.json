@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Luan\\ambientacao\\api\\api\\API.csproj": {}
+    "C:\\Luan\\ambientacao\\API\\API\\API.csproj": {}
   },
   "projects": {
-    "C:\\Luan\\ambientacao\\api\\api\\API.csproj": {
+    "C:\\Luan\\ambientacao\\API\\API\\API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Luan\\ambientacao\\api\\api\\API.csproj",
+        "projectUniqueName": "C:\\Luan\\ambientacao\\API\\API\\API.csproj",
         "projectName": "API",
-        "projectPath": "C:\\Luan\\ambientacao\\api\\api\\API.csproj",
+        "projectPath": "C:\\Luan\\ambientacao\\API\\API\\API.csproj",
         "packagesPath": "C:\\Users\\autologon\\.nuget\\packages\\",
-        "outputPath": "C:\\Luan\\ambientacao\\api\\api\\obj\\",
+        "outputPath": "C:\\Luan\\ambientacao\\API\\API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
