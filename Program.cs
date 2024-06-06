@@ -7,6 +7,21 @@ var builder = WebApplication.CreateBuilder(args);
 //Registrar o serviço de banco da dados
 builder.Services.AddDbContext<AppDataContext>();
 
+//Configurar a Politica de CORS para liberar o acesso total.
+builder.Services.AddCors(
+    options => options.AddPolicy("Acesso Total",
+     configs => configs
+        .AllowAnyOrigin()
+        .AllowAnyHeader()
+        .AllowAnyMethod())
+);
+
+
+
+
+
+
+
 var app = builder.Build();
 
 
@@ -33,7 +48,7 @@ app.MapGet("/produto/listar", ([FromServices] AppDataContext ctx) =>
 app.MapGet("/produto/buscar/{id}", ([FromRoute] string id,
     [FromServices] AppDataContext ctx) =>
 {
-    Produto? produto = ctx.TabelaProdutos.Find(id);
+    Produto? produto = ctx.TabelaProdutos.Find();
     if (produto == null)
     {
         return Results.NotFound("Produto não encontrado!");
@@ -64,8 +79,7 @@ app.MapPost("/produto/cadastrar", ([FromBody] Produto produto, [FromServices] Ap
          ctx.SaveChanges();
          return Results.Created("", produto);
      }
-     return Results.BadRequest("Já Existe um produto com o mesmo nome");
-
+     return Results.BadRequest("Já Existe um Produto com o mesmo nome");
 
  });
 
@@ -103,7 +117,7 @@ app.MapPut("/produtos/alterar/{id}", ([FromRoute] string id, [FromBody] Produto 
 
 });
 
-
+app.UseCors("Acesso Total");
 app.Run();
 
 
